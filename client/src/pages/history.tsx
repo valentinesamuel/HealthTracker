@@ -21,9 +21,9 @@ export default function History() {
   return (
     <div className="max-w-md mx-auto">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
         <div className="px-4 py-4">
-          <h1 className="text-xl font-semibold text-text-dark mb-4">Reading History</h1>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Reading History</h1>
           
           {/* Search and Filter */}
           <div className="flex space-x-2">

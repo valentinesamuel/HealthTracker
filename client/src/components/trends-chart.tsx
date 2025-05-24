@@ -12,13 +12,13 @@ export function TrendsChart({ data }: TrendsChartProps) {
 
   if (chartData.length === 0) {
     return (
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-medium text-text-dark">7-Day Trend</h3>
-          <BarChart3 className="h-5 w-5 text-gray-400" />
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">7-Day Trend</h3>
+          <BarChart3 className="h-5 w-5 text-gray-400 dark:text-gray-500" />
         </div>
-        <div className="h-32 bg-gray-50 rounded-xl flex items-center justify-center">
-          <p className="text-gray-500">No data to display</p>
+        <div className="h-32 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center">
+          <p className="text-gray-500 dark:text-gray-400">No data to display</p>
         </div>
       </div>
     );
@@ -29,16 +29,16 @@ export function TrendsChart({ data }: TrendsChartProps) {
   const systolicRange = maxSystolic - minSystolic || 20;
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-medium text-text-dark">7-Day Trend</h3>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-white">7-Day Trend</h3>
         <BarChart3 className="h-5 w-5 text-medical-blue" />
       </div>
       
       {/* Chart */}
-      <div className="h-32 bg-gradient-to-t from-blue-50 to-transparent rounded-xl flex items-end justify-between px-2 py-4 relative">
+      <div className="h-32 bg-gradient-to-t from-blue-50 dark:from-blue-900/20 to-transparent rounded-xl flex items-end justify-between px-2 py-4 relative">
         {/* Y-axis labels */}
-        <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-400 py-4">
+        <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-400 dark:text-gray-500 py-4">
           <span>{maxSystolic + 10}</span>
           <span>{Math.round((maxSystolic + minSystolic) / 2)}</span>
           <span>{Math.max(minSystolic - 10, 80)}</span>
@@ -75,7 +75,7 @@ export function TrendsChart({ data }: TrendsChartProps) {
       </div>
       
       {/* X-axis labels */}
-      <div className="flex justify-between text-xs text-gray-500 mt-2 px-6">
+      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-2 px-6">
         {chartData.map((reading) => (
           <span key={reading.id} className="text-center">
             {format(new Date(reading.recordedAt), "EEE")}
@@ -87,19 +87,19 @@ export function TrendsChart({ data }: TrendsChartProps) {
       <div className="flex justify-center space-x-4 mt-4 text-xs">
         <div className="flex items-center space-x-1">
           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span className="text-gray-600">Normal</span>
+          <span className="text-gray-600 dark:text-gray-400">Normal</span>
         </div>
         <div className="flex items-center space-x-1">
           <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-          <span className="text-gray-600">Elevated</span>
+          <span className="text-gray-600 dark:text-gray-400">Elevated</span>
         </div>
         <div className="flex items-center space-x-1">
           <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-          <span className="text-gray-600">Stage 1</span>
+          <span className="text-gray-600 dark:text-gray-400">Stage 1</span>
         </div>
         <div className="flex items-center space-x-1">
           <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-          <span className="text-gray-600">Stage 2+</span>
+          <span className="text-gray-600 dark:text-gray-400">Stage 2+</span>
         </div>
       </div>
     </div>

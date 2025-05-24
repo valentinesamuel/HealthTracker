@@ -15,10 +15,10 @@ export function StatsOverview() {
 
   if (!latestReading) {
     return (
-      <div className="bg-white rounded-2xl p-6 shadow-sm text-center">
-        <Activity className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-        <h2 className="text-lg font-medium text-text-dark mb-2">No Readings Yet</h2>
-        <p className="text-gray-500">Add your first blood pressure reading below</p>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm text-center">
+        <Activity className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+        <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No Readings Yet</h2>
+        <p className="text-gray-500 dark:text-gray-400">Add your first blood pressure reading below</p>
       </div>
     );
   }
@@ -63,10 +63,10 @@ export function StatsOverview() {
             {category.category}
           </span>
           {latestReading.pulse && (
-            <span className="text-sm text-gray-600">💓 {latestReading.pulse} bpm</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">💓 {latestReading.pulse} bpm</span>
           )}
         </div>
-        <p className="text-xs text-gray-500 mt-2">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
           {formatDistanceToNow(recordedDate, { addSuffix: true })}
         </p>
       </div>
