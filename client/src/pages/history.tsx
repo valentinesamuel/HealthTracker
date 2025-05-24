@@ -45,31 +45,31 @@ export default function History() {
 
       <main className="px-4 py-4">
         {/* Stats Summary */}
-        <div className="bg-white rounded-xl p-4 shadow-sm mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm mb-6">
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
               <p className="text-2xl font-bold text-medical-blue">
                 {filteredReadings.length}
               </p>
-              <p className="text-xs text-gray-500">Total Readings</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Total Readings</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-text-dark">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {filteredReadings.length > 0 
                   ? Math.round(filteredReadings.reduce((sum, r) => sum + r.systolic, 0) / filteredReadings.length)
                   : 0
                 }
               </p>
-              <p className="text-xs text-gray-500">Avg Systolic</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Avg Systolic</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-text-dark">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {filteredReadings.length > 0 
                   ? Math.round(filteredReadings.reduce((sum, r) => sum + r.diastolic, 0) / filteredReadings.length)
                   : 0
                 }
               </p>
-              <p className="text-xs text-gray-500">Avg Diastolic</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Avg Diastolic</p>
             </div>
           </div>
         </div>

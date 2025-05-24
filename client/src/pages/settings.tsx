@@ -170,12 +170,12 @@ export default function Settings() {
         </Card>
 
         {/* Disclaimer */}
-        <div className="bg-yellow-50 p-4 rounded-lg">
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
           <div className="flex items-start space-x-3">
-            <Info className="h-5 w-5 text-yellow-600 mt-0.5" />
+            <Info className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
             <div>
-              <p className="text-sm font-medium text-yellow-800">Medical Disclaimer</p>
-              <p className="text-sm text-yellow-600 mt-1">
+              <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">Medical Disclaimer</p>
+              <p className="text-sm text-yellow-600 dark:text-yellow-300 mt-1">
                 This app is for tracking purposes only. Always consult with healthcare professionals 
                 for medical advice and treatment decisions.
               </p>
