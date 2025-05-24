@@ -72,13 +72,13 @@ export function StatsOverview() {
       </div>
       
       {/* Quick stats */}
-      <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
+      <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100 dark:border-gray-700">
         <div className="text-center">
           <div className="flex items-center justify-center mb-1">
             {getTrendIcon(stats?.trend)}
           </div>
-          <p className="text-xs text-gray-500">Trend</p>
-          <p className="text-sm font-medium text-text-dark">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Trend</p>
+          <p className="text-sm font-medium text-gray-900 dark:text-white">
             {getTrendText(stats?.trend)}
           </p>
         </div>
@@ -87,8 +87,8 @@ export function StatsOverview() {
           <div className="flex items-center justify-center mb-1">
             <Activity className="h-4 w-4 text-medical-blue" />
           </div>
-          <p className="text-xs text-gray-500">Average</p>
-          <p className="text-sm font-medium text-text-dark">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Average</p>
+          <p className="text-sm font-medium text-gray-900 dark:text-white">
             {stats?.averageSystolic || 0}/{stats?.averageDiastolic || 0}
           </p>
         </div>
@@ -97,8 +97,8 @@ export function StatsOverview() {
           <div className="flex items-center justify-center mb-1">
             <Calendar className="h-4 w-4 text-medical-blue" />
           </div>
-          <p className="text-xs text-gray-500">Total</p>
-          <p className="text-sm font-medium text-text-dark">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Total</p>
+          <p className="text-sm font-medium text-gray-900 dark:text-white">
             {stats?.totalReadings || 0} readings
           </p>
         </div>

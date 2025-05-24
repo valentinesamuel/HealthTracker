@@ -109,12 +109,12 @@ export default function Settings() {
               Export Data (CSV)
             </Button>
 
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
               <div className="flex items-start space-x-3">
-                <Info className="h-5 w-5 text-blue-600 mt-0.5" />
+                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-blue-800">Export Info</p>
-                  <p className="text-sm text-blue-600 mt-1">
+                  <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Export Info</p>
+                  <p className="text-sm text-blue-600 dark:text-blue-300 mt-1">
                     Export your blood pressure data as a CSV file to share with your healthcare provider.
                   </p>
                 </div>
@@ -129,12 +129,12 @@ export default function Settings() {
             <CardTitle className="text-lg">Privacy & Security</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="bg-green-50 p-4 rounded-lg">
+            <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
               <div className="flex items-start space-x-3">
-                <Shield className="h-5 w-5 text-green-600 mt-0.5" />
+                <Shield className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-green-800">Your Data is Secure</p>
-                  <p className="text-sm text-green-600 mt-1">
+                  <p className="text-sm font-medium text-green-800 dark:text-green-200">Your Data is Secure</p>
+                  <p className="text-sm text-green-600 dark:text-green-300 mt-1">
                     All your health data is stored securely and is never shared with third parties.
                   </p>
                 </div>

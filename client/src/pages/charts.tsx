@@ -104,34 +104,34 @@ export default function Charts() {
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">BP Categories</h3>
           
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
               <div>
-                <p className="font-medium text-green-800">Normal</p>
-                <p className="text-sm text-green-600">Less than 120/80</p>
+                <p className="font-medium text-green-800 dark:text-green-200">Normal</p>
+                <p className="text-sm text-green-600 dark:text-green-300">Less than 120/80</p>
               </div>
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
             
-            <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
               <div>
-                <p className="font-medium text-yellow-800">Elevated</p>
-                <p className="text-sm text-yellow-600">120-129 / Less than 80</p>
+                <p className="font-medium text-yellow-800 dark:text-yellow-200">Elevated</p>
+                <p className="text-sm text-yellow-600 dark:text-yellow-300">120-129 / Less than 80</p>
               </div>
               <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
             </div>
             
-            <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
               <div>
-                <p className="font-medium text-orange-800">Stage 1</p>
-                <p className="text-sm text-orange-600">130-139 / 80-89</p>
+                <p className="font-medium text-orange-800 dark:text-orange-200">Stage 1</p>
+                <p className="text-sm text-orange-600 dark:text-orange-300">130-139 / 80-89</p>
               </div>
               <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
             </div>
             
-            <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
               <div>
-                <p className="font-medium text-red-800">Stage 2</p>
-                <p className="text-sm text-red-600">140/90 or higher</p>
+                <p className="font-medium text-red-800 dark:text-red-200">Stage 2</p>
+                <p className="text-sm text-red-600 dark:text-red-300">140/90 or higher</p>
               </div>
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
             </div>
