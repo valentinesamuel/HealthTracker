@@ -8,6 +8,7 @@ interface TrendsChartProps {
 }
 
 export function TrendsChart({ data }: TrendsChartProps) {
+  // Show the most recent readings (up to 7, but at least what we have)
   const chartData = data?.slice(-7) || [];
 
   if (chartData.length === 0) {

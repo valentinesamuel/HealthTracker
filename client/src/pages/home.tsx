@@ -73,7 +73,7 @@ export default function Home() {
 
         {/* Trends Chart */}
         <section className="mb-6">
-          <TrendsChart />
+          <TrendsChart data={readings} />
         </section>
 
         {/* Health Insight */}

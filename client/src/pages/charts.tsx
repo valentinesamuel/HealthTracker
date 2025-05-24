@@ -13,8 +13,8 @@ export default function Charts() {
     queryKey: ["/api/blood-pressure/stats"],
   });
 
-  const last7Days = readings?.slice(0, 7).reverse() || [];
-  const last30Days = readings?.slice(0, 30) || [];
+  const last7Days = readings?.slice(-7) || [];
+  const last30Days = readings?.slice(-30) || [];
 
   const getTrendIcon = (trend: string | null) => {
     switch (trend) {
