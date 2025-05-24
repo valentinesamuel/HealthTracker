@@ -12,7 +12,7 @@ export function BottomNavigation() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 z-40">
       <div className="max-w-md mx-auto">
         <div className="flex items-center justify-around py-2">
           {navItems.map(({ path, icon: Icon, label }) => {
@@ -22,7 +22,7 @@ export function BottomNavigation() {
                 key={path}
                 onClick={() => navigate(path)}
                 className={`flex flex-col items-center justify-center py-2 px-4 touch-target transition-colors ${
-                  isActive ? "text-medical-blue" : "text-gray-400"
+                  isActive ? "text-medical-blue" : "text-gray-400 dark:text-gray-500"
                 }`}
               >
                 <Icon className="h-5 w-5 mb-1" />

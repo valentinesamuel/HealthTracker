@@ -36,46 +36,72 @@ export default function Charts() {
       </header>
 
       <main className="px-4 py-4 space-y-6">
-        {/* Overall Trend */}
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-text-dark">Overall Trend</h3>
-            {getTrendIcon(stats?.trend)}
-          </div>
+        {/* Health Status Summary */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Health Status Overview</h3>
           
-          <div className="grid grid-cols-2 gap-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-medical-blue">
-                {stats?.averageSystolic || 0}
-              </p>
-              <p className="text-xs text-gray-500">Average Systolic</p>
+          {readings && readings.length > 0 ? (
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <p className="text-2xl font-bold text-medical-blue">
+                    {stats?.averageSystolic || 0}/{stats?.averageDiastolic || 0}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Overall Average</p>
+                </div>
+                <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                  <div className="flex items-center justify-center mb-1">
+                    {getTrendIcon(stats?.trend)}
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {stats?.trend === 'decreasing' ? 'Improving' : 
+                     stats?.trend === 'increasing' ? 'Attention Needed' : 'Stable'}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Latest vs Average Comparison */}
+              {readings[0] && (
+                <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">Latest vs Average</h4>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">Latest Reading:</span>
+                    <span className="font-medium text-gray-900 dark:text-white">
+                      {readings[0].systolic}/{readings[0].diastolic} mmHg
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm mt-1">
+                    <span className="text-gray-600 dark:text-gray-400">Difference:</span>
+                    <span className={`font-medium ${
+                      readings[0].systolic > (stats?.averageSystolic || 0) 
+                        ? 'text-red-600 dark:text-red-400' 
+                        : 'text-green-600 dark:text-green-400'
+                    }`}>
+                      {readings[0].systolic > (stats?.averageSystolic || 0) ? '+' : ''}
+                      {readings[0].systolic - (stats?.averageSystolic || 0)}/
+                      {readings[0].diastolic > (stats?.averageDiastolic || 0) ? '+' : ''}
+                      {readings[0].diastolic - (stats?.averageDiastolic || 0)} mmHg
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-medical-blue">
-                {stats?.averageDiastolic || 0}
-              </p>
-              <p className="text-xs text-gray-500">Average Diastolic</p>
-            </div>
-          </div>
-
-          {stats?.lastWeekAverage && (
-            <div className="mt-4 pt-4 border-t border-gray-100">
-              <p className="text-sm text-gray-600 text-center">
-                Last week average: {stats.lastWeekAverage.systolic}/{stats.lastWeekAverage.diastolic} mmHg
-              </p>
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-gray-500 dark:text-gray-400">No data available for analysis</p>
             </div>
           )}
         </div>
 
         {/* 7-Day Chart */}
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="text-lg font-medium text-text-dark mb-4">7-Day Trend</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">7-Day Trend</h3>
           <TrendsChart data={last7Days} />
         </div>
 
         {/* Blood Pressure Categories */}
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="text-lg font-medium text-text-dark mb-4">BP Categories</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">BP Categories</h3>
           
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
@@ -114,8 +140,8 @@ export default function Charts() {
 
         {/* Reading Distribution */}
         {last30Days.length > 0 && (
-          <div className="bg-white rounded-xl p-6 shadow-sm">
-            <h3 className="text-lg font-medium text-text-dark mb-4">30-Day Distribution</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">30-Day Distribution</h3>
             
             <div className="space-y-2">
               {['Normal', 'Elevated', 'Stage 1', 'Stage 2'].map((category) => {
