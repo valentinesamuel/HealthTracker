@@ -27,9 +27,9 @@ export function BloodPressureForm() {
   const form = useForm<InsertBloodPressureReading>({
     resolver: zodResolver(insertBloodPressureReadingSchema),
     defaultValues: {
-      systolic: undefined,
-      diastolic: undefined,
-      pulse: undefined,
+      systolic: "" as any,
+      diastolic: "" as any,
+      pulse: "" as any,
       notes: "",
       tags: [],
     },

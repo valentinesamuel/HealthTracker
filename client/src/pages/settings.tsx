@@ -4,11 +4,12 @@ import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTheme } from "@/components/theme-provider";
 import type { BloodPressureReading } from "@shared/schema";
 
 export default function Settings() {
   const [notifications, setNotifications] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
   
   const { data: readings } = useQuery<BloodPressureReading[]>({
     queryKey: ["/api/blood-pressure"],
@@ -86,8 +87,8 @@ export default function Settings() {
                 </div>
               </div>
               <Switch
-                checked={darkMode}
-                onCheckedChange={setDarkMode}
+                checked={theme === "dark"}
+                onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
               />
             </div>
           </CardContent>
