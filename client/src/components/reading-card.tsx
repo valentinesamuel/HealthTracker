@@ -54,14 +54,14 @@ export function ReadingCard({ reading, showDate = false }: ReadingCardProps) {
   return (
     <div
       {...swipeHandlers}
-      className="reading-card bg-white rounded-xl p-4 shadow-sm touch-target transition-transform"
+      className="reading-card bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm touch-target transition-transform"
     >
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex items-center space-x-3">
-            <div className="text-lg font-bold text-text-dark">
+            <div className="text-lg font-bold text-gray-900 dark:text-white">
               {reading.systolic}/{reading.diastolic}
-              <span className="text-sm text-gray-500 font-normal ml-1">mmHg</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400 font-normal ml-1">mmHg</span>
             </div>
             <span className={`px-2 py-1 text-xs rounded-full ${category.bgColor} ${category.textColor}`}>
               {category.category}

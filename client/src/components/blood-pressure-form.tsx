@@ -94,8 +94,8 @@ export function BloodPressureForm() {
   const category = systolic && diastolic ? getBPCategory(systolic, diastolic) : null;
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm">
-      <h3 className="text-lg font-medium text-text-dark mb-4 flex items-center">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
+      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
         <Plus className="text-medical-blue mr-2 h-5 w-5" />
         Add Reading
       </h3>
@@ -224,7 +224,7 @@ export function BloodPressureForm() {
                   className={`px-3 py-2 text-sm rounded-full touch-target transition-colors ${
                     selectedTags.includes(tag.value)
                       ? "bg-medical-blue text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                   }`}
                 >
                   <span className="mr-1">{tag.icon}</span>
@@ -232,6 +232,34 @@ export function BloodPressureForm() {
                 </button>
               ))}
             </div>
+            
+            {/* Selected Tags Display */}
+            {selectedTags.length > 0 && (
+              <div className="mt-3">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Selected tags:</p>
+                <div className="flex flex-wrap gap-1">
+                  {selectedTags.map((tag) => {
+                    const tagInfo = quickTags.find(t => t.value === tag);
+                    return (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center px-2 py-1 text-xs bg-medical-blue text-white rounded-full"
+                      >
+                        <span className="mr-1">{tagInfo?.icon}</span>
+                        {tagInfo?.label}
+                        <button
+                          type="button"
+                          onClick={() => toggleTag(tag)}
+                          className="ml-1 text-white/80 hover:text-white"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Submit Button */}

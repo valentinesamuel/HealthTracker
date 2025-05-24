@@ -49,9 +49,9 @@ export function StatsOverview() {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
       <div className="text-center mb-4">
-        <h2 className="text-lg font-medium text-text-dark mb-2">Latest Reading</h2>
+        <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Latest Reading</h2>
         <div className="flex items-center justify-center space-x-2">
           <span className="text-3xl font-bold text-medical-blue">{latestReading.systolic}</span>
           <span className="text-2xl text-gray-400">/</span>

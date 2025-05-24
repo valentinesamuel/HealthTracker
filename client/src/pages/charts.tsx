@@ -29,9 +29,9 @@ export default function Charts() {
   return (
     <div className="max-w-md mx-auto">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
         <div className="px-4 py-4">
-          <h1 className="text-xl font-semibold text-text-dark">Charts & Trends</h1>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Charts & Trends</h1>
         </div>
       </header>
 
