@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 11% 98%; /* #F5F7FA */
+  --foreground: 210 11% 13%; /* #212121 */
+  --muted: 210 11% 96%; /* #F5F5F5 */
+  --muted-foreground: 210 6% 46%; /* #737373 */
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 11% 13%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 11% 13%;
+  --border: 210 11% 90%; /* #E5E5E5 */
+  --input: 210 11% 90%;
+  --primary: 207 90% 54%; /* #2196F3 */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 210 11% 96%;
+  --secondary-foreground: 210 11% 13%;
+  --accent: 210 11% 96%;
+  --accent-foreground: 210 11% 13%;
+  --destructive: 0 84% 60%; /* #F44336 */
+  --destructive-foreground: 0 0% 98%;
+  --ring: 207 90% 54%;
+  --radius: 0.75rem;
+
+  /* Custom medical colors */
+  --medical-blue: 207 90% 54%; /* #2196F3 */
+  --healthy-green: 122 39% 49%; /* #4CAF50 */
+  --alert-red: 4 90% 58%; /* #F44336 */
+  --bg-light: 210 11% 96%; /* #F5F5F5 */
+  --text-dark: 210 11% 13%; /* #212121 */
+}
+
+.dark {
+  --background: 210 11% 4%;
+  --foreground: 0 0% 98%;
+  --muted: 210 6% 10%;
+  --muted-foreground: 210 6% 63%;
+  --popover: 210 11% 4%;
+  --popover-foreground: 0 0% 98%;
+  --card: 210 11% 4%;
+  --card-foreground: 0 0% 98%;
+  --border: 210 6% 16%;
+  --input: 210 6% 16%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 210 6% 10%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 210 6% 10%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 207 90% 54%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Roboto', sans-serif;
+  }
+
+  /* Custom utility classes */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .reading-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .reading-card:active {
+    transform: scale(0.98);
+  }
+
+  /* PWA optimizations */
+  .pwa-ready {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Number input optimization */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Custom color classes */
+  .bg-medical-blue {
+    background-color: hsl(var(--medical-blue));
+  }
+
+  .text-medical-blue {
+    color: hsl(var(--medical-blue));
+  }
+
+  .bg-healthy-green {
+    background-color: hsl(var(--healthy-green));
+  }
+
+  .text-healthy-green {
+    color: hsl(var(--healthy-green));
+  }
+
+  .bg-alert-red {
+    background-color: hsl(var(--alert-red));
+  }
+
+  .text-alert-red {
+    color: hsl(var(--alert-red));
+  }
+
+  .bg-bg-light {
+    background-color: hsl(var(--bg-light));
+  }
+
+  .text-text-dark {
+    color: hsl(var(--text-dark));
+  }
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Smooth scrolling for better mobile experience */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improved focus states for accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
