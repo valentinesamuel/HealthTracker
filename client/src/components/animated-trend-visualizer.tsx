@@ -11,9 +11,10 @@ interface AnimatedTrendVisualizerProps {
 }
 
 export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVisualizerProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
+  const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
+  const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout>();
 
   // Get last 30 days of data
@@ -47,6 +48,7 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
   };
 
   const getX = (index: number) => {
+    if (chartData.length <= 1) return 50;
     return (index / (chartData.length - 1)) * 100;
   };
 
@@ -68,18 +70,26 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
     })
     .join(' ');
 
+  // Auto-play on load
+  useEffect(() => {
+    if (chartData.length > 0 && !hasAutoPlayed) {
+      setHasAutoPlayed(true);
+      setIsPlaying(true);
+    }
+  }, [chartData.length, hasAutoPlayed]);
+
   // Animation controls
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && chartData.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex(prev => {
           if (prev >= chartData.length - 1) {
             setIsPlaying(false);
-            return 0;
+            return chartData.length - 1;
           }
           return prev + 1;
         });
-      }, 500);
+      }, 800);
     } else {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -100,7 +110,7 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
     }
   };
 
-  const currentReading = chartData[hoveredPoint ?? currentIndex];
+  const currentReading = chartData[selectedPoint ?? currentIndex];
   const category = currentReading ? getBPCategory(currentReading.systolic, currentReading.diastolic) : null;
 
   // Calculate trend
@@ -136,11 +146,11 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
         </div>
       </div>
 
-      {/* Current Reading Display */}
+      {/* Current Reading Display - Only show when point is selected */}
       <AnimatePresence mode="wait">
-        {currentReading && (
+        {currentReading && selectedPoint !== null && (
           <motion.div
-            key={currentIndex}
+            key={selectedPoint}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
@@ -253,7 +263,7 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
                 <motion.circle
                   cx={x}
                   cy={systolicY}
-                  r={hoveredPoint === index ? "1.5" : "1"}
+                  r={selectedPoint === index ? "1.5" : "1"}
                   fill="#2196F3"
                   stroke="white"
                   strokeWidth="0.3"
@@ -264,15 +274,14 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
                   }}
                   transition={{ delay: isPlaying ? index * 0.1 : 0 }}
                   className="cursor-pointer"
-                  onMouseEnter={() => setHoveredPoint(index)}
-                  onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setSelectedPoint(selectedPoint === index ? null : index)}
                 />
                 
                 {/* Diastolic Point */}
                 <motion.circle
                   cx={x}
                   cy={diastolicY}
-                  r={hoveredPoint === index ? "1.5" : "1"}
+                  r={selectedPoint === index ? "1.5" : "1"}
                   fill="#4CAF50"
                   stroke="white"
                   strokeWidth="0.3"
@@ -283,8 +292,7 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
                   }}
                   transition={{ delay: isPlaying ? index * 0.1 : 0 }}
                   className="cursor-pointer"
-                  onMouseEnter={() => setHoveredPoint(index)}
-                  onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setSelectedPoint(selectedPoint === index ? null : index)}
                 />
 
                 {/* Category Indicator */}
@@ -305,29 +313,7 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
           })}
         </svg>
 
-        {/* Hover Tooltip */}
-        <AnimatePresence>
-          {hoveredPoint !== null && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              className="absolute bg-gray-900 dark:bg-gray-700 text-white p-2 rounded shadow-lg pointer-events-none z-10"
-              style={{
-                left: `${getX(hoveredPoint)}%`,
-                top: `${getY(chartData[hoveredPoint].systolic) - 60}px`,
-                transform: 'translateX(-50%)'
-              }}
-            >
-              <p className="text-xs">
-                {format(new Date(chartData[hoveredPoint].recordedAt), "MMM d")}
-              </p>
-              <p className="font-medium">
-                {chartData[hoveredPoint].systolic}/{chartData[hoveredPoint].diastolic}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
       </div>
 
       {/* Legend */}
