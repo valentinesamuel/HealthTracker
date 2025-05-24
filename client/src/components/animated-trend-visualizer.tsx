@@ -19,25 +19,12 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
 
   // Get last 30 days of data
   const chartData = data?.slice(-30) || [];
-  
-  if (chartData.length === 0) {
-    return (
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Trend Visualizer</h3>
-          <Activity className="h-5 w-5 text-medical-blue" />
-        </div>
-        <div className="h-48 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center">
-          <p className="text-gray-500 dark:text-gray-400">No data to visualize</p>
-        </div>
-      </div>
-    );
-  }
 
-  const maxSystolic = Math.max(...chartData.map(r => r.systolic));
-  const minSystolic = Math.min(...chartData.map(r => r.systolic));
-  const maxDiastolic = Math.max(...chartData.map(r => r.diastolic));
-  const minDiastolic = Math.min(...chartData.map(r => r.diastolic));
+  // Calculate chart bounds - handle empty data
+  const maxSystolic = chartData.length > 0 ? Math.max(...chartData.map(r => r.systolic)) : 120;
+  const minSystolic = chartData.length > 0 ? Math.min(...chartData.map(r => r.systolic)) : 120;
+  const maxDiastolic = chartData.length > 0 ? Math.max(...chartData.map(r => r.diastolic)) : 80;
+  const minDiastolic = chartData.length > 0 ? Math.min(...chartData.map(r => r.diastolic)) : 80;
   
   const yMax = Math.max(maxSystolic + 10, 180);
   const yMin = Math.max(minDiastolic - 10, 60);
@@ -129,6 +116,21 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
 
   const trend = getTrend();
 
+  // Show empty state if no data
+  if (chartData.length === 0) {
+    return (
+      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Animated Trend Visualizer</h3>
+          <Activity className="h-5 w-5 text-medical-blue" />
+        </div>
+        <div className="h-48 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center">
+          <p className="text-gray-500 dark:text-gray-400">No data to visualize</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
@@ -195,7 +197,7 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
           className="overflow-visible"
         >
           {/* Grid lines */}
-          {[...Array(5)].map((_, i) => {
+          {chartData.length > 0 && [...Array(5)].map((_, i) => {
             const y = (i / 4) * height;
             const value = Math.round(yMax - (i / 4) * yRange);
             return (
@@ -217,7 +219,7 @@ export function AnimatedTrendVisualizer({ data, height = 200 }: AnimatedTrendVis
                   className="text-xs fill-gray-400 dark:fill-gray-500"
                   fontSize="3"
                 >
-                  {value}
+                  {isNaN(value) ? 0 : value}
                 </text>
               </g>
             );
