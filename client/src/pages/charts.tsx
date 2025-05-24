@@ -1,4 +1,5 @@
 import { TrendsChart } from "@/components/trends-chart";
+import { AnimatedTrendVisualizer } from "@/components/animated-trend-visualizer";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import type { BloodPressureReading } from "@shared/schema";
@@ -36,6 +37,9 @@ export default function Charts() {
       </header>
 
       <main className="px-4 py-4 space-y-6">
+        {/* Animated Trend Visualizer */}
+        <AnimatedTrendVisualizer data={readings || []} />
+
         {/* Health Status Summary */}
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Health Status Overview</h3>
